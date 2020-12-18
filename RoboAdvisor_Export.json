@@ -1,0 +1,165 @@
+{
+  "metadata": {
+    "schemaVersion": "1.0",
+    "importType": "LEX",
+    "importFormat": "JSON"
+  },
+  "resource": {
+    "name": "RoboAdvisor",
+    "version": "1",
+    "intents": [
+      {
+        "name": "RecommendPortfolio",
+        "version": "4",
+        "fulfillmentActivity": {
+          "codeHook": {
+            "uri": "arn:aws:lambda:us-west-2:703389545555:function:recommendPortfolio",
+            "messageVersion": "1.0"
+          },
+          "type": "CodeHook"
+        },
+        "sampleUtterances": [
+          "I want to save money for my retirement",
+          "I'm {age} and I would like to invest for my retirement",
+          "I am {age} and I want to invest for my retirement",
+          "I want the best option to invest for my retirement",
+          "I'm worried about my retirement",
+          "I want to invest for my retirement",
+          "I would like to invest for my retirement"
+        ],
+        "slots": [
+          {
+            "sampleUtterances": [],
+            "slotType": "AMAZON.NUMBER",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "How old are you?"
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 2,
+            "name": "age"
+          },
+          {
+            "sampleUtterances": [],
+            "slotType": "AMAZON.US_FIRST_NAME",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "Thank you for trusting me to help, could you please give me your name?"
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 1,
+            "name": "firstName"
+          },
+          {
+            "sampleUtterances": [],
+            "slotType": "AMAZON.NUMBER",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "How much do you want to invest?"
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 3,
+            "name": "investmentAmount"
+          },
+          {
+            "sampleUtterances": [],
+            "slotType": "riskLevel",
+            "slotTypeVersion": "1",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "What level of investment risk would you like to take?"
+                }
+              ],
+              "responseCard": "{\"version\":1,\"contentType\":\"application/vnd.amazonaws.card.generic\",\"genericAttachments\":[{\"imageUrl\":\"https://utoronto.bootcampcontent.com/utoronto-bootcamp/utor-tor-fin-pt-09-2020-u-c/-/raw/master/02-Homework/13-AWS-Lex/Instructions/Icons/none.png\",\"subTitle\":\"No risk at all\",\"title\":\"None\",\"buttons\":[{\"text\":\"None\",\"value\":\"None\"}]},{\"imageUrl\":\"https://utoronto.bootcampcontent.com/utoronto-bootcamp/utor-tor-fin-pt-09-2020-u-c/-/raw/master/02-Homework/13-AWS-Lex/Instructions/Icons/low.png\",\"subTitle\":\"Just a sprinkling of risk\",\"title\":\"Very Low or Low\",\"buttons\":[{\"text\":\"Low\",\"value\":\"Low\"}]},{\"imageUrl\":\"https://utoronto.bootcampcontent.com/utoronto-bootcamp/utor-tor-fin-pt-09-2020-u-c/-/raw/master/02-Homework/13-AWS-Lex/Instructions/Icons/medium.png\",\"subTitle\":\"Let's get a little more risk\",\"title\":\"Medium\",\"buttons\":[{\"text\":\"Medium\",\"value\":\"Medium\"}]},{\"imageUrl\":\"https://utoronto.bootcampcontent.com/utoronto-bootcamp/utor-tor-fin-pt-09-2020-u-c/-/raw/master/02-Homework/13-AWS-Lex/Instructions/Icons/high.png\",\"subTitle\":\"Let's get risky!\",\"title\":\"High\",\"buttons\":[{\"text\":\"High\",\"value\":\"High\"}]}]}",
+              "maxAttempts": 2
+            },
+            "priority": 4,
+            "name": "riskLevel"
+          }
+        ],
+        "dialogCodeHook": {
+          "uri": "arn:aws:lambda:us-west-2:703389545555:function:recommendPortfolio",
+          "messageVersion": "1.0"
+        }
+      }
+    ],
+    "slotTypes": [
+      {
+        "name": "riskLevel",
+        "version": "1",
+        "enumerationValues": [
+          {
+            "value": "High",
+            "synonyms": [
+              "lots"
+            ]
+          },
+          {
+            "value": "Low",
+            "synonyms": [
+              "Low"
+            ]
+          },
+          {
+            "value": "Medium",
+            "synonyms": [
+              "medium"
+            ]
+          },
+          {
+            "value": "None",
+            "synonyms": [
+              "none"
+            ]
+          }
+        ],
+        "valueSelectionStrategy": "TOP_RESOLUTION"
+      }
+    ],
+    "voiceId": "Salli",
+    "childDirected": false,
+    "locale": "en-US",
+    "idleSessionTTLInSeconds": 300,
+    "clarificationPrompt": {
+      "messages": [
+        {
+          "contentType": "PlainText",
+          "content": "Sorry, can you please repeat that?"
+        }
+      ],
+      "maxAttempts": 5
+    },
+    "abortStatement": {
+      "messages": [
+        {
+          "contentType": "PlainText",
+          "content": "Sorry, I could not understand. Goodbye."
+        }
+      ]
+    },
+    "detectSentiment": false,
+    "enableModelImprovements": false
+  }
+}
