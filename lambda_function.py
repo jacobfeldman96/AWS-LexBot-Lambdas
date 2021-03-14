@@ -127,7 +127,6 @@ def recommend_portfolio(intent_request):
         # Use the elicitSlot dialog action to re-prompt
         # for the first violation detected.
 
-        ### YOUR DATA VALIDATION CODE STARTS HERE ###
         slots = get_slots(intent_request)
         
         # Validates user's input using the validate_data function
@@ -146,7 +145,6 @@ def recommend_portfolio(intent_request):
                 validation_result["violatedSlot"],
                 validation_result["message"],
             )
-        ### YOUR DATA VALIDATION CODE ENDS HERE ###
 
         # Fetch current session attibutes
         output_session_attributes = intent_request["sessionAttributes"]
@@ -155,7 +153,6 @@ def recommend_portfolio(intent_request):
 
     # Get the initial investment recommendation
     
-    ### YOUR FINAL INVESTMENT RECOMMENDATION CODE STARTS HERE ###
     initial_recommendation = 'We recommend '
     if risk_level == 'None':
         initial_recommendation += '100% bonds (AGG), 0% equities (SPY)'
@@ -165,7 +162,6 @@ def recommend_portfolio(intent_request):
         initial_rec ommendation += "40% bonds (AGG), 60% equities (SPY)"
     elif risk_level == 'High':
         initial_recommendation += "20% bonds (AGG), 80% equities (SPY)"        
-    ### YOUR FINAL INVESTMENT RECOMMENDATION CODE ENDS HERE ###
 
     # Return a message with the initial recommendation based on the risk level.
     return close(
